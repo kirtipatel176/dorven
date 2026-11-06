@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Brand } from "@/types/brand";
 import { Product } from "@/types/product";
 import { BrandEditorialHeader } from "./BrandEditorialHeader";
@@ -22,6 +24,7 @@ const CATEGORIES: BrandCategory[] = [
   "SNEAKERS",
   "SPORTSWEAR",
   "LIFESTYLE",
+  "PERFORMANCE",
 ];
 
 export function BrandsDirectoryView({
@@ -64,9 +67,8 @@ export function BrandsDirectoryView({
       if (activeCategory !== "ALL BRANDS") {
         const matchesCategory =
           brand.categories?.includes(activeCategory) ||
-          (activeCategory === "LUXURY" && brand.isExclusiveLabel) ||
-          (activeCategory === "SNEAKERS" &&
-            ["nike", "adidas", "new-balance", "puma", "asics"].includes(brand.id));
+          (activeCategory === "LUXURY" && (brand.isExclusiveLabel || brand.categories?.includes("LUXURY"))) ||
+          (activeCategory === "PERFORMANCE" && brand.categories?.includes("PERFORMANCE"));
 
         if (!matchesCategory) return false;
       }
@@ -150,6 +152,28 @@ export function BrandsDirectoryView({
             : activeCategory
         }
       />
+
+      {/* 07. DIRECTORY EDITORIAL FOOTER */}
+      <section className="py-20 sm:py-28 bg-[#171717] text-[#F8F6F2] border-t border-[#262626]">
+        <div className="max-w-4xl mx-auto px-6 sm:px-10 text-center">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-[#C6AD83] block mb-4">
+            THE D&apos;ORVEN DIRECTORY
+          </span>
+          <h2 className="font-serif text-3xl sm:text-5xl font-normal text-[#F8F6F2] tracking-tight mb-6">
+            Discover your next signature pair.
+          </h2>
+          <p className="text-sm sm:text-base text-[#918C84] font-light leading-relaxed max-w-2xl mx-auto mb-10">
+            Explore footwear shaped by different perspectives, cultures and generations. Find the silhouette that speaks to your individual style.
+          </p>
+          <Link
+            href="/shop"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#F8F6F2] text-[#171717] text-xs font-mono uppercase tracking-[0.24em] font-medium hover:bg-white transition-all group"
+          >
+            <span>EXPLORE ALL FOOTWEAR</span>
+            <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }

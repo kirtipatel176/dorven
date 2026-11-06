@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 interface DorvenLogoProps {
@@ -8,47 +9,53 @@ interface DorvenLogoProps {
   className?: string;
   showSubtitle?: boolean;
   href?: string;
+  priority?: boolean;
 }
+
+const logoDimensions: Record<
+  "xs" | "sm" | "md" | "lg" | "xl",
+  { height: number; width: number; heightClass: string }
+> = {
+  xs: { height: 13, width: 95, heightClass: "h-[13px]" },
+  sm: { height: 16, width: 118, heightClass: "h-[15px] sm:h-[16px]" },
+  md: { height: 19, width: 140, heightClass: "h-[17px] sm:h-[19px]" },
+  lg: { height: 23, width: 169, heightClass: "h-[21px] sm:h-[23px]" },
+  xl: { height: 28, width: 206, heightClass: "h-[25px] sm:h-[28px]" },
+};
 
 export function DorvenLogo({
   size = "md",
-  variant = "adaptive",
+  variant = "white",
   className = "",
   showSubtitle = false,
   href = "/",
+  priority = true,
 }: DorvenLogoProps) {
-  // Height and scale mappings
-  const heightClasses = {
-    xs: "h-5 sm:h-6",
-    sm: "h-6 sm:h-7",
-    md: "h-7 sm:h-8",
-    lg: "h-9 sm:h-11",
-    xl: "h-12 sm:h-14",
-  };
+  const { height, width, heightClass } = logoDimensions[size];
 
-  // Variant color mappings
-  const variantColorClasses = {
-    charcoal: "text-[#171717]",
-    white: "text-[#F8F6F2]",
-    champagne: "text-[#D8C6A5]",
-    adaptive: "text-[#171717] dark:text-[#F8F6F2]",
-  };
+  // Resolve logo image: defaults to dorven-logo-white.png
+  const logoSrc =
+    variant === "charcoal"
+      ? "/images/dorven-logo-charcoal.png"
+      : variant === "champagne"
+      ? "/images/dorven-logo-champagne.png"
+      : "/images/dorven-logo-white.png";
 
   const content = (
     <div className={`inline-flex flex-col items-start select-none ${className}`}>
-      <div className={`relative flex items-center ${heightClasses[size]} ${variantColorClasses[variant]} transition-all duration-300`}>
-        {/* Refined vector typography wordmark: D'ORVEN */}
-        <div className="flex items-center tracking-[0.32em] font-serif font-medium uppercase leading-none text-inherit text-xl sm:text-2xl transition-all duration-300">
-          <span className="inline-flex items-baseline">
-            <span>D</span>
-            <span className="text-[#D8C6A5] mx-[1.5px] font-sans font-light text-[0.8em] -translate-y-[2px] inline-block">’</span>
-            <span>ORVEN</span>
-          </span>
-        </div>
+      <div className="relative flex items-center">
+        <Image
+          src={logoSrc}
+          alt="D'ORVEN Footwear"
+          width={width}
+          height={height}
+          priority={priority}
+          className={`${heightClass} w-auto object-contain transition-opacity duration-300 hover:opacity-90`}
+        />
       </div>
 
       {showSubtitle && (
-        <span className="text-[9px] uppercase tracking-[0.35em] text-[#918C84] mt-0.5 font-sans font-medium">
+        <span className="text-[8.5px] uppercase tracking-[0.3em] text-[#918C84] mt-1 font-sans font-medium">
           Footwear Atelier
         </span>
       )}
@@ -57,7 +64,11 @@ export function DorvenLogo({
 
   if (href) {
     return (
-      <Link href={href} className="inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-charcoal" aria-label="DORVON Footwear Home">
+      <Link
+        href={href}
+        className="inline-block focus:outline-none focus-visible:ring-1 focus-visible:ring-charcoal"
+        aria-label="D'ORVEN Footwear Home"
+      >
         {content}
       </Link>
     );
@@ -65,4 +76,3 @@ export function DorvenLogo({
 
   return content;
 }
-

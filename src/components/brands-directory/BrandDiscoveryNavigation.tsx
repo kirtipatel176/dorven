@@ -9,7 +9,8 @@ export type BrandCategory =
   | "LUXURY"
   | "SNEAKERS"
   | "SPORTSWEAR"
-  | "LIFESTYLE";
+  | "LIFESTYLE"
+  | "PERFORMANCE";
 
 interface BrandDiscoveryNavigationProps {
   categories: BrandCategory[];

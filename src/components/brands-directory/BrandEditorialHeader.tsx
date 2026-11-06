@@ -30,7 +30,7 @@ export function BrandEditorialHeader({
             >
               <span className="h-[1px] w-8 bg-[#C6AD83]" />
               <span className="text-[11px] font-mono uppercase tracking-[0.3em] font-semibold text-[#858078]">
-                THE D&apos;ORVEN DIRECTORY
+                A CURATED WORLD OF FOOTWEAR
               </span>
             </motion.div>
 
@@ -54,10 +54,7 @@ export function BrandEditorialHeader({
               transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg text-[#858078] max-w-xl font-sans font-light leading-relaxed mb-10"
             >
-              An independent selection of footwear labels defined by design,
-              heritage and individuality. Hand-selected for exceptional
-              craftsmanship, verified provenance, and timeless aesthetic
-              resonance.
+              An independent selection of footwear labels defined by design, heritage and individuality. Discover iconic sportswear houses, contemporary innovators and timeless names shaping the world of modern footwear.
             </motion.p>
 
             {/* Live Portfolio Index Badges */}

@@ -95,10 +95,76 @@ const BRAND_LOGOS: Record<string, React.ReactNode> = {
       </span>
     </div>
   ),
+  on: (
+    <div className="flex items-center gap-1.5 select-none">
+      <span className="font-sans font-black text-2xl sm:text-3xl tracking-tighter leading-none">
+        On
+      </span>
+      <span className="text-[9px] tracking-[0.25em] font-semibold text-[#918C84] uppercase">
+        RUNNING
+      </span>
+    </div>
+  ),
+  skechers: (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black italic tracking-[0.16em] text-lg sm:text-xl uppercase">
+        SKECHERS
+      </span>
+    </div>
+  ),
+  reebok: (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black tracking-[0.16em] text-lg sm:text-xl uppercase">
+        Reebok
+      </span>
+    </div>
+  ),
+  converse: (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black tracking-tight text-base sm:text-lg uppercase">
+        ★ CONVERSE
+      </span>
+    </div>
+  ),
+  vans: (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black italic tracking-wider text-lg sm:text-xl uppercase">
+        VANS
+      </span>
+    </div>
+  ),
+  hoka: (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black italic tracking-widest text-lg sm:text-xl uppercase">
+        HOKA
+      </span>
+    </div>
+  ),
+  salomon: (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black tracking-[0.22em] text-base sm:text-lg uppercase">
+        SALOMON
+      </span>
+    </div>
+  ),
+  clarks: (
+    <div className="flex items-center select-none">
+      <span className="font-serif italic font-bold tracking-[0.18em] text-lg sm:text-xl">
+        Clarks
+      </span>
+    </div>
+  ),
+  "dr-martens": (
+    <div className="flex items-center select-none">
+      <span className="font-sans font-black tracking-[0.18em] text-base sm:text-lg uppercase">
+        Dr. Martens
+      </span>
+    </div>
+  ),
 };
 
 export function FeaturedBrandsSection() {
-  const brands: BrandLogoItem[] = brandsData.slice(0, 8).map((b) => ({
+  const brands: BrandLogoItem[] = brandsData.map((b) => ({
     id: b.id,
     name: b.name,
     slug: b.slug,

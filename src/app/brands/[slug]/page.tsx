@@ -71,14 +71,24 @@ export default async function BrandDetailPage({ params }: PageProps) {
 
             <div className="absolute bottom-8 left-8 right-8 max-w-3xl">
               <span className="text-[11px] uppercase tracking-luxury font-bold text-champagne block mb-2">
-                ESTABLISHED {brand.foundedYear} • {brand.origin}
+                ESTABLISHED {brand.foundedYear} • {brand.origin} {brand.categoryLabel ? `• ${brand.categoryLabel}` : ""}
               </span>
-              <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight mb-3">
+              <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight mb-2">
                 {brand.name}
               </h1>
-              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-2xl">
+              {brand.tagline && (
+                <p className="text-sm italic text-champagne/90 mb-3 font-serif">
+                  &ldquo;{brand.tagline}&rdquo;
+                </p>
+              )}
+              <p className="text-sm sm:text-base text-neutral-300 leading-relaxed max-w-2xl mb-4">
                 {brand.description}
               </p>
+              {brand.signature && (
+                <div className="text-xs text-white/90 font-mono tracking-wider">
+                  <span className="text-champagne font-semibold uppercase">Signature Silhouettes:</span> {brand.signature}
+                </div>
+              )}
             </div>
           </div>
         </div>

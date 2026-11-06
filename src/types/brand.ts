@@ -5,6 +5,10 @@ export interface Brand {
   origin: string;
   tagline: string;
   description: string;
+  categoryLabel?: string;
+  signature?: string;
+  ctaText?: string;
+  orderNumber?: string;
   isExclusiveLabel?: boolean;
   heroImage: string;
   campaignImage?: string;

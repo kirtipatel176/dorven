@@ -12,6 +12,7 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import { siteConfig } from "@/data/siteConfig";
+import { DorvenLogo } from "@/components/common/Logo";
 
 const adminNav = [
   { label: "Dashboard", href: "/admin", icon: LayoutDashboard },
@@ -29,11 +30,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Admin Top Bar */}
       <div className="bg-charcoal text-white px-6 py-3 flex items-center justify-between text-xs">
         <div className="flex items-center gap-3">
-          <span className="font-bold tracking-luxury uppercase text-champagne">
-            {siteConfig.brandName} ADMIN CONSOLE
-          </span>
+          <DorvenLogo size="xs" variant="white" href="/admin" />
           <span className="px-2 py-0.5 rounded bg-white/10 text-[10px] text-neutral-300">
-            Catalogue Management Mode
+            ADMIN CONSOLE
           </span>
         </div>
 

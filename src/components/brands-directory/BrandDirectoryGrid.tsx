@@ -58,8 +58,8 @@ export function BrandDirectoryGrid({
             </p>
           </div>
         ) : (
-          /* Editorial Grid (4 Columns on Desktop, 2 on Tablet/Mobile) */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          /* Editorial Grid (3 Columns on Desktop, 2 on Tablet, 1 on Mobile for optimum editorial readability) */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
             {brands.map((brand, idx) => {
               const productCount = getProductCount(brand);
               const destination = brand.isExclusiveLabel
@@ -74,21 +74,21 @@ export function BrandDirectoryGrid({
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{
                     duration: 0.6,
-                    delay: (idx % 4) * 0.08,
+                    delay: (idx % 3) * 0.08,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="group flex flex-col bg-[#F8F6F2] border border-[#E5E0D8] transition-all duration-500 hover:border-[#171717] hover:shadow-[0_12px_32px_rgba(23,23,23,0.06)]"
+                  className="group flex flex-col bg-[#FFFFFF] border border-[#E5E0D8] transition-all duration-500 hover:border-[#171717] hover:shadow-[0_16px_40px_rgba(23,23,23,0.08)]"
                 >
                   {/* Brand Representative Footwear Image */}
                   <Link
                     href={destination}
-                    className="relative aspect-[4/3] w-full overflow-hidden bg-[#EEEAE3] block"
+                    className="relative aspect-[16/10] w-full overflow-hidden bg-[#EEEAE3] block"
                   >
                     <Image
                       src={brand.heroImage}
                       alt={`${brand.name} representative footwear`}
                       fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
 
@@ -97,61 +97,83 @@ export function BrandDirectoryGrid({
 
                     {/* Brand Origin / Established Pill */}
                     <div className="absolute top-3 left-3">
-                      <span className="backdrop-blur-md bg-[#171717]/80 text-[#F8F6F2] text-[9px] font-mono uppercase tracking-[0.2em] px-2.5 py-1">
-                        Est. {brand.foundedYear}
+                      <span className="backdrop-blur-md bg-[#171717]/85 text-[#F8F6F2] text-[9px] font-mono uppercase tracking-[0.2em] px-2.5 py-1">
+                        {brand.origin}
                       </span>
                     </div>
 
-                    {/* In-House Atelier Badge */}
-                    {brand.isExclusiveLabel && (
-                      <div className="absolute top-3 right-3">
-                        <span className="backdrop-blur-md bg-[#C6AD83] text-[#171717] text-[9px] font-mono uppercase tracking-[0.2em] font-semibold px-2.5 py-1">
-                          Atelier
-                        </span>
-                      </div>
-                    )}
+                    {/* Order Number / Atelier Badge */}
+                    <div className="absolute top-3 right-3">
+                      <span className="backdrop-blur-md bg-[#171717]/85 text-[#C6AD83] text-[10px] font-mono tracking-widest font-semibold px-2.5 py-1">
+                        {brand.orderNumber ? brand.orderNumber : `0${idx + 1}`}
+                      </span>
+                    </div>
                   </Link>
 
                   {/* Brand Meta & Info */}
-                  <div className="p-6 flex-1 flex flex-col justify-between">
+                  <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between bg-white">
                     <div>
                       {/* Logo & Category */}
-                      <div className="flex items-center justify-between gap-2 pb-4 mb-4 border-b border-[#E5E0D8]">
+                      <div className="flex items-center justify-between gap-2 pb-4 mb-5 border-b border-[#E5E0D8]">
                         <div className="text-[#171717]">
-                          <BrandLogoMark brandId={brand.id} className="h-4 w-auto" />
+                          <BrandLogoMark brandId={brand.id} className="h-4.5 w-auto" />
                         </div>
-                        <span className="text-[9px] font-mono uppercase tracking-[0.2em] text-[#858078]">
-                          {brand.origin.split(",")[0]}
-                        </span>
+                        {brand.categoryLabel && (
+                          <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#858078]">
+                            {brand.categoryLabel}
+                          </span>
+                        )}
                       </div>
 
-                      {/* Brand Name */}
-                      <h3 className="font-serif text-2xl font-normal text-[#171717] tracking-tight mb-2">
+                      {/* Brand Name & Number */}
+                      <h3 className="font-serif text-2xl sm:text-3xl font-normal text-[#171717] tracking-tight mb-2">
                         <Link
                           href={destination}
                           className="hover:text-[#C6AD83] transition-colors"
                         >
-                          {brand.name}
+                          {brand.orderNumber && !brand.isExclusiveLabel ? `${brand.orderNumber}. ` : ""}
+                          {brand.name.toUpperCase()}
                         </Link>
                       </h3>
 
-                      {/* Tagline / Excerpt */}
-                      <p className="text-xs text-[#858078] font-sans font-light line-clamp-2 leading-relaxed mb-4">
-                        {brand.tagline}
+                      {/* Tagline */}
+                      {brand.tagline && (
+                        <p className="text-xs font-serif italic text-[#858078] mb-3">
+                          &ldquo;{brand.tagline}&rdquo;
+                        </p>
+                      )}
+
+                      {/* Description Narrative */}
+                      <p className="text-xs sm:text-[13px] text-[#4A4742] font-sans font-light leading-relaxed mb-6">
+                        {brand.description}
                       </p>
+
+                      {/* Signature Models */}
+                      {brand.signature && (
+                        <div className="pt-3 pb-1 border-t border-[#E5E0D8]/60 mb-4">
+                          <span className="text-[9px] uppercase font-mono tracking-[0.22em] text-[#858078] block mb-1">
+                            Signature
+                          </span>
+                          <span className="text-xs font-sans text-[#171717] font-medium tracking-wide">
+                            {brand.signature}
+                          </span>
+                        </div>
+                      )}
                     </div>
 
                     {/* Card Footer: Product Count & Explore CTA */}
-                    <div className="pt-4 border-t border-[#E5E0D8] flex items-center justify-between">
+                    <div className="pt-4 mt-2 border-t border-[#E5E0D8] flex items-center justify-between">
                       <span className="text-[10px] font-mono tracking-widest text-[#858078] uppercase">
-                        {productCount} {productCount === 1 ? "Silhouette" : "Silhouettes"}
+                        {productCount > 0
+                          ? `${productCount} ${productCount === 1 ? "Silhouette" : "Silhouettes"}`
+                          : "Curated House"}
                       </span>
 
                       <Link
                         href={destination}
-                        className="inline-flex items-center gap-1 text-[11px] font-mono uppercase tracking-[0.2em] text-[#171717] group-hover:text-[#C6AD83] transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono uppercase tracking-[0.2em] font-medium text-[#171717] group-hover:text-[#C6AD83] transition-colors"
                       >
-                        <span>Explore</span>
+                        <span>{brand.ctaText || `Explore ${brand.name}`}</span>
                         <ArrowUpRight className="h-3.5 w-3.5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                       </Link>
                     </div>

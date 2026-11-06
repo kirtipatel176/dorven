@@ -27,11 +27,17 @@ export function BrandLogoMark({ brandId, className = "h-5 w-auto" }: BrandLogoPr
           className={`${className} fill-current`}
           aria-label="Adidas Trefoil"
         >
-          {/* Authentic Adidas 3-Bar / Trefoil mark */}
           <path d="M4.5 28.5L0 28.5L10.5 8.5L15 8.5L4.5 28.5Z" />
           <path d="M19.5 28.5L15 28.5L25.5 0L30 0L19.5 28.5Z" />
           <path d="M34.5 28.5L30 28.5L40.5 4.5L45 4.5L34.5 28.5Z" />
         </svg>
+      );
+
+    case "puma":
+      return (
+        <span className="font-sans font-black tracking-[0.2em] text-sm sm:text-base uppercase text-current">
+          PUMA
+        </span>
       );
 
     case "new-balance":
@@ -46,6 +52,13 @@ export function BrandLogoMark({ brandId, className = "h-5 w-auto" }: BrandLogoPr
         </div>
       );
 
+    case "skechers":
+      return (
+        <span className="font-sans font-black italic tracking-[0.16em] text-sm sm:text-base uppercase text-current">
+          SKECHERS
+        </span>
+      );
+
     case "asics":
       return (
         <span className="font-sans font-black italic tracking-wider text-sm sm:text-base uppercase text-current">
@@ -53,13 +66,30 @@ export function BrandLogoMark({ brandId, className = "h-5 w-auto" }: BrandLogoPr
         </span>
       );
 
-    case "birkenstock":
+    case "reebok":
       return (
-        <span className="font-serif font-bold tracking-[0.25em] text-xs sm:text-sm uppercase text-current">
-          BIRKENSTOCK
+        <span className="font-sans font-black tracking-[0.16em] text-sm sm:text-base uppercase text-current">
+          Reebok
         </span>
       );
 
+    case "converse":
+      return (
+        <div className="flex items-center gap-1">
+          <span className="font-sans font-black tracking-tight text-sm uppercase text-current">
+            ★ CONVERSE
+          </span>
+        </div>
+      );
+
+    case "vans":
+      return (
+        <span className="font-sans font-black italic tracking-wider text-sm sm:text-base uppercase text-current">
+          VANS
+        </span>
+      );
+
+    case "on":
     case "on-running":
       return (
         <div className="flex items-center gap-1.5">
@@ -72,10 +102,38 @@ export function BrandLogoMark({ brandId, className = "h-5 w-auto" }: BrandLogoPr
         </div>
       );
 
-    case "puma":
+    case "hoka":
       return (
-        <span className="font-sans font-black tracking-widest text-sm sm:text-base uppercase text-current">
-          PUMA
+        <span className="font-sans font-black italic tracking-widest text-sm sm:text-base uppercase text-current">
+          HOKA
+        </span>
+      );
+
+    case "salomon":
+      return (
+        <span className="font-sans font-black tracking-[0.22em] text-xs sm:text-sm uppercase text-current">
+          SALOMON
+        </span>
+      );
+
+    case "clarks":
+      return (
+        <span className="font-serif italic font-bold tracking-[0.18em] text-sm sm:text-base text-current">
+          Clarks
+        </span>
+      );
+
+    case "birkenstock":
+      return (
+        <span className="font-serif font-bold tracking-[0.25em] text-xs sm:text-sm uppercase text-current">
+          BIRKENSTOCK
+        </span>
+      );
+
+    case "dr-martens":
+      return (
+        <span className="font-sans font-black tracking-[0.18em] text-xs sm:text-sm uppercase text-current">
+          Dr. Martens
         </span>
       );
 
@@ -93,4 +151,3 @@ export function BrandLogoMark({ brandId, className = "h-5 w-auto" }: BrandLogoPr
       );
   }
 }
-
